@@ -49,3 +49,18 @@ table { width: 100%; border-collapse: collapse; margin-top: 10px; }
 th { text-align: left; color: var(--accent); font-size: 0.8rem; }
 td { padding: 10px; border-bottom: 1px solid #334155; }
 tr:first-child td { color: var(--gold); font-weight: bold; }
+
+#btn-enviar {
+    background-color: #28a745;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}
+#btn-enviar:hover {
+    background-color: #218838;
+}

@@ -3,45 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prode Mundial 2026 - Oficina</title>
+    <title>Prode Mundial 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
-        <h1>🏆 PRODE UNITED 2026</h1>
-        <div class="user-box">
-            <input type="text" id="nombre-usuario" placeholder="Tu nombre" autocomplete="off">
-        </div>
+        <h1>🏆 Mi Prode Oficina 2026</h1>
     </header>
 
     <main>
-        <section id="fixture-section">
-            <h2>📅 Partidos Disponibles</h2>
-            <p class="info-text">⚠️ Recuerda: Puedes apostar hasta 24hs antes del partido.</p>
-            <div id="contenedor-partidos">
-                </div>
+        <section class="seccion-usuario">
+            <label for="nombre-usuario">Tu Nombre:</label>
+            <input type="text" id="nombre-usuario" placeholder="Ingresa tu nombre..." autocomplete="off">
         </section>
 
-        <section id="ranking-section">
-            <div class="header-ranking">
-                <h2>📊 Tabla de Posiciones</h2>
-                <div id="contenedor-ranking">
-                    </div>
-                <button onclick="cargarRanking()" class="btn-mini">🔄 Actualizar</button>
+        <hr>
+
+        <section id="seccion-fixture">
+            <h2>⚽ Partidos Disponibles</h2>
+            <div id="contenedor-partidos">
+                <p>Cargando partidos...</p>
             </div>
-            <table id="tabla-ranking">
-                <thead>
-                    <tr>
-                        <th>Pos</th>
-                        <th>Jugador</th>
-                        <th>Pts</th>
-                    </tr>
-                </thead>
-                <tbody id="cuerpo-ranking">
-                    </tbody>
-            </table>
+            
+            <div class="contenedor-boton">
+                <button onclick="enviar()" id="btn-enviar">
+                    💾 Guardar Todas mis Predicciones
+                </button>
+            </div>
         </section>
+
+        <hr>
+
+        <section id="seccion-ranking">
+            <h2>📊 Tabla de Posiciones</h2>
+            <div id="contenedor-ranking">
+                <p>Cargando posiciones...</p>
+            </div>
+        </section>
+
     </main>
+
+    <footer>
+        <p>Actualizado en tiempo real - ¡Buena suerte!</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
