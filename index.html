@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prode Mundial 2026 - Oficina</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🏆 PRODE UNITED 2026</h1>
+        <div class="user-box">
+            <input type="text" id="nombre-usuario" placeholder="Tu nombre" autocomplete="off">
+        </div>
+    </header>
+
+    <main>
+        <section id="fixture-section">
+            <h2>📅 Partidos Disponibles</h2>
+            <p class="info-text">⚠️ Recuerda: Puedes apostar hasta 24hs antes del partido.</p>
+            <div id="contenedor-partidos">
+                </div>
+        </section>
+
+        <section id="ranking-section">
+            <div class="header-ranking">
+                <h2>📊 Tabla de Posiciones</h2>
+                <div id="contenedor-ranking">
+                    </div>
+                <button onclick="cargarRanking()" class="btn-mini">🔄 Actualizar</button>
+            </div>
+            <table id="tabla-ranking">
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Jugador</th>
+                        <th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-ranking">
+                    </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
