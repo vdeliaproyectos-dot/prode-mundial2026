@@ -1,4 +1,4 @@
-const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbwNqrXEmVMwI6dfojUhw5GkO51GmVc8a89tNVLJzVFKShS73xOz_6SxAQujGWjEiNcTbA/exec";
+const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbzdP1GbBI2_j05m6ZDzy8ApX4zgwQZnykJU7G2dxNL83w0RZLsb08JVWHuxwZwmlSB_kg/exec";
 
 // Función que se ejecuta al cargar la página
 window.onload = function() {
