@@ -65,25 +65,41 @@ function cargarFixture() {
     });
 }
 
-function enviar(id, local, visita) {
-    const user = document.getElementById("nombre-usuario").value;
-    if(!user) return alert("¡Pon tu nombre!");
-    
+function enviar() {
+    const nombre = document.getElementById("nombre-usuario").value;
+    if (!nombre) {
+        alert("Por favor, ingresa tu nombre");
+        return;
+    }
+
+    // Aquí armamos los datos de las predicciones
+    // Asegúrate de que los nombres coincidan con los que espera tu doPost
     const datos = {
-        nombre: user,
-        partido: id,
-        golesL: document.getElementById(`L-${id}`).value,
-        golesV: document.getElementById(`V-${id}`).value,
-        local: local,
-        visitante: visita
+        nombre: nombre,
+        partido: "P1", // O el ID que estés usando
+        golesL: document.getElementById("golesL-P1").value,
+        golesV: document.getElementById("golesV-P1").value
     };
 
     fetch(URL_GOOGLE_SCRIPT, {
-        method: 'POST',
-        mode: 'no-cors',
+        method: "POST",
+        mode: "no-cors", // <--- MUY IMPORTANTE para evitar bloqueos
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(datos)
-    }).then(() => alert("¡Enviado!"));
-    document.getElementById("nombre-usuario").value = "";
+    })
+    .then(() => {
+        // Con "no-cors" no podemos leer la respuesta de Google, 
+        // así que asumimos que se envió si no hay error de red.
+        alert("¡Predicción enviada con éxito!");
+        document.getElementById("nombre-usuario").value = ""; 
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert("Hubo un error al enviar.");
+    });
 }
 
 function cargarRanking() {
