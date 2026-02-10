@@ -85,3 +85,159 @@ tr:first-child td { color: var(--gold); font-weight: bold; }
     margin-bottom: 10px;
     border-radius: 8px;
 }
+
+
+
+
+/* Contenedor de las 4 columnas */
+.grid-cuatro-columnas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Crea 4 columnas iguales */
+    gap: 15px; /* Espacio entre las tarjetitas */
+    margin-bottom: 40px;
+}
+
+/* Ajuste para que en tablets sean 2 columnas y en celular 1 */
+@media (max-width: 1024px) {
+    .grid-cuatro-columnas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-cuatro-columnas {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilo de cada tarjetita de partido */
+.partido-card {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+.info-partido {
+    font-size: 0.8em;
+    color: #ffd700;
+    margin-bottom: 8px;
+}
+
+.equipos-fila {
+    display: flex;
+    flex-direction: column; /* Cambiamos a vertical para que quepa en 4 columnas */
+    gap: 5px;
+    align-items: center;
+}
+
+.input-goles {
+    width: 40px;
+    background: #111;
+    color: white;
+    border: 1px solid #ffd700;
+    text-align: center;
+    border-radius: 4px;
+}
+.titulo-etapa-mundial {
+    background-color: #004d40; /* Un verde oscuro tipo cancha o el color de tu marca */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 10px 10px 0 0;
+    text-transform: uppercase;
+    font-size: 2em;
+    letter-spacing: 2px;
+    border-bottom: 4px solid #ffd700; /* Línea dorada inferior */
+}
+
+.instrucciones-prode {
+    text-align: center;
+    color: #ccc;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+/* Alineación horizontal de los equipos e inputs */
+.fila-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.bloque-equipo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 1; /* Esto hace que ambos lados ocupen el mismo espacio */
+}
+
+.bloque-equipo.local {
+    justify-content: flex-end; /* Alinea nombre y caja a la derecha */
+}
+
+.bloque-equipo.visitante {
+    justify-content: flex-start; /* Alinea caja y nombre a la izquierda */
+}
+
+.nombre-equipo {
+    font-size: 0.9em;
+    font-weight: 500;
+    white-space: nowrap; /* Evita que el nombre se corte en dos líneas */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Pone "..." si el nombre es muy largo */
+}
+
+.vs-divisor {
+    font-size: 0.7em;
+    color: #888;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Ajuste de los inputs para que sean más estéticos */
+.input-goles {
+    width: 35px;
+    height: 30px;
+    background: #111;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.input-goles:focus {
+    border-color: #ffd700;
+    outline: none;
+}
+
+.bandera {
+    width: 28px; /* Un poquito más grande */
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    border: 1px solid #444; /* Un borde fino para banderas blancas */
+}
+
+.nombre-equipo {
+    min-width: 60px; /* Evita que el nombre se pegue demasiado */
+}
+
+/* Ajustamos los bloques para que la bandera esté en el medio del nombre y el input */
+.bloque-equipo.local {
+    justify-content: flex-end;
+}
+
+.bloque-equipo.visitante {
+    justify-content: flex-start;
+}
+
+/* Espaciado entre elementos */
+.bloque-equipo > * {
+    margin: 0 4px;
+}

@@ -14,29 +14,90 @@ function cargarFixture() {
         .then(res => res.json())
         .then(partidos => {
             const contenedor = document.getElementById("contenedor-partidos");
-            contenedor.innerHTML = ""; // Limpiamos el "Cargando..."
+            contenedor.innerHTML = ""; 
 
+            // --- PUNTO 1: DICCIONARIO DE BANDERAS (VA AQUÍ) ---
+            const banderas = {
+                        // Grupo A
+                        "México": "mx", "Sudáfrica": "za", "Corea del Sur": "kr",
+                        // Grupo B
+                        "Canadá": "ca", "Italia": "it", "Nigeria": "ng", "Gales": "gb-wls", "Bosnia": "ba", "Qatar": "qa", "Suiza": "ch",
+                        // Grupo C
+                        "Brasil": "br", "Marruecos": "ma", "Haití": "ht", "Escocia": "gb-sct",
+                        // Grupo D
+                        "Estados Unidos": "us", "Paraguay": "py", "Australia": "au", "Turquía": "tr", "Rumania": "ro", "Eslovaquia": "sk", "Kosovo": "xk",
+                        // Grupo E
+                        "Alemania": "de", "Curazao": "cw", "Costa de Marfil": "ci", "Ecuador": "ec",
+                        // Grupo F
+                        "Países Bajos": "nl", "Japón": "jp", "Ucrania": "ua", "Suecia": "se", "Polonia": "pl", "Albania": "al", "Túnez": "tn",
+                        // Grupo G
+                        "Bélgica": "be", "Egipto": "eg", "Irán": "ir", "Nueva Zelanda": "nz",
+                        // Grupo H
+                        "España": "es", "Cabo Verde": "cv", "Arabia Saudita": "sa", "Uruguay": "uy",
+                        // Grupo I
+                        "Francia": "fr", "Senegal": "sn", "Irak": "iq", "Bolivia": "bo", "Surinam": "sr", "Noruega": "no",
+                        // Grupo J
+                        "Argentina": "ar", "Argelia": "dz", "Austria": "at", "Jordania": "jo",
+                        // Grupo K
+                        "Portugal": "pt", "Jamaica": "jm", "RD de Congo": "cd", "Nueva Caledonia": "nc", "Uzbekistán": "uz", "Colombia": "co",
+                        // Grupo L
+                        "Inglaterra": "gb-eng", "Croacia": "hr", "Ghana": "gh", "Panamá": "pa",
+                        // Extras / Repechajes
+                        "Clasificatorio A": "un", "Clasificatorio B": "un", "Clasificatorio D": "un", "Clasificatorio F": "un", "Clasificatorio I": "un", "Clasificatorio K": "un"
+            };
+
+            // --- 2. AGRUPAR POR FASE/GRUPO ---
+            const grupos = {};
             partidos.forEach(p => {
-                const div = document.createElement("div");
-                div.className = "partido-card";
-                div.innerHTML = `
-                    <div class="info-partido">
-                        <span>${p.fase} - ${p.fecha}</span>
-                    </div>
-                    <div class="equipos-fila">
-                        <span class="nombre-equipo">${p.equipoL}</span>
-                        <input type="number" id="golesL-${p.id}" class="input-goles" min="0" placeholder="0">
-                        <span> vs </span>
-                        <input type="number" id="golesV-${p.id}" class="input-goles" min="0" placeholder="0">
-                        <span class="nombre-equipo">${p.equipoV}</span>
-                    </div>
-                `;
-                contenedor.appendChild(div);
+                if (!grupos[p.fase]) { grupos[p.fase] = []; }
+                grupos[p.fase].push(p);
             });
-        })
-        .catch(err => {
-            console.error("Error al cargar fixture:", err);
-            document.getElementById("contenedor-partidos").innerHTML = "Error al cargar los partidos.";
+
+            // --- 3. RECORRER CADA GRUPO Y DIBUJAR ---
+            for (const nombreGrupo in grupos) {
+                const seccion = document.createElement("div");
+                seccion.className = "seccion-grupo";
+                seccion.innerHTML = `<h3 class="titulo-fase">${nombreGrupo}</h3>`;
+                
+                const gridPartidos = document.createElement("div");
+                gridPartidos.className = "grid-tres-columnas";
+
+                // AQUÍ ES DONDE SE USA EL DICCIONARIO
+                grupos[nombreGrupo].forEach(p => {
+                    const codeL = banderas[p.equipoL] || "un";
+                    const codeV = banderas[p.equipoV] || "un";
+
+                    const card = document.createElement("div");
+                    card.className = "partido-card";
+                    card.innerHTML = `
+                    
+                        <div class="info-partido">${p.fecha}</div>
+                        <div class="fila-horizontal">
+                            <div class="bloque-equipo local">
+                                <span class="nombre-equipo">${p.equipoL}</span>
+                                <img src="https://flagcdn.com/w40/${codeL}.png" class="bandera">
+                                <input type="number" id="golesL-${p.id}" class="input-goles" placeholder="0">
+                            </div>
+                            <div class="vs-divisor">vs</div>
+                            <div class="bloque-equipo visitante">
+                                <input type="number" id="golesV-${p.id}" class="input-goles" placeholder="0">
+                                <img src="https://flagcdn.com/w40/${codeV}.png" class="bandera">
+                                <span class="nombre-equipo">${p.equipoV}</span>
+                            </div>
+                        </div>
+                    `;
+                    gridPartidos.appendChild(card);
+                });
+
+                seccion.appendChild(gridPartidos);
+                contenedor.appendChild(seccion);
+            }
+
+            // --- 4. ACTUALIZAR CONTADOR TOTAL ---
+            document.getElementById("total-partidos").innerText = partidos.length;
+            document.querySelectorAll('.input-goles').forEach(input => {
+                input.addEventListener('input', actualizarContador);
+            });
         });
 }
 
